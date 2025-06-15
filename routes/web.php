@@ -10,8 +10,11 @@ Route::get('/', function () {
 });
 
 Route::get('/books', function () {
+
+    $books = Book::with(['author', 'tags'])->paginate(3);
+
     return view('books',  [
-        'books' => Book::all()
+        'books' => $books
     ]);
 });
 
