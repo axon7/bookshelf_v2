@@ -14,16 +14,27 @@
         <div class="sm:col-span-3">
           <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
           <div class="mt-2">
-            <input type="text" name="title" id="title" autocomplete="" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+            <input type="text" name="title" id="title" autocomplete=""  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
           </div>
       </div>
       <div class="sm:col-span-3">
           <label for="description" class="block text-sm/6 font-medium text-gray-900">Description</label>
           <div class="mt-2">
-            <textarea name="description" id="description" rows="3" class="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+            <textarea name="description" id="description"  rows="3" class="mt-2 block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
           </div>
       </div>
       
+      @if($errors->any())
+          <div class="mt-4">
+              <div class="text-red-600 text-sm">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          </div>
+      @endif
     </div>    
   </div>
 

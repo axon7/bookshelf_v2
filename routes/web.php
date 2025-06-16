@@ -17,6 +17,12 @@ Route::get('/books', function () {
 
 Route::post('/books', function () {
 
+    request()->validate([
+        'title' => 'required|min:3|max:255',
+        'author_id' => 'required|exists:authors,id',
+        'description' => 'nullable|string|max:1000',
+    ]);
+
     Book::create([
         'title' => request('title'),
         'author_id' => request('author_id'),
