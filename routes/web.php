@@ -39,10 +39,43 @@ Route::get('/books/create', function () {
 
 Route::get('/books/{id}', function ($id) {
     $book = Book::find($id);
-    $author = $book->author;
-    dd($author->first_name);
+    // $author = $book->author;
+    // dd($author->first_name);
 
     return view('books.show',  ['book' => $book]);;
+});
+
+
+//Edit a book (view)
+Route::get('/books/{id}/edit', function ($id) {
+    $book = Book::find($id);
+    return view('books.edit',  ['book' => $book]);;
+});
+
+// Update a book
+Route::patch('/books/{id}', function ($id) {
+    $book = Book::find($id);
+
+    request()->validate([
+        'title' => 'required|min:3|max:255',
+        // 'author_id' => 'required|exists:authors,id',
+        'description' => 'nullable|string|max:1000',
+    ]);
+
+    $book->update([
+        'title' => request('title'),
+        'author_id' => 1,
+        'description' => request('description'),
+    ]);
+
+    return redirect('/books/' . $book->id);
+});
+
+//Delete a book
+Route::delete('/books/{id}', function ($id) {
+    $book = Book::findOrFail($id);
+    $book->delete();
+    return redirect('/books');
 });
 
 
